@@ -67,8 +67,9 @@ function getListObject()
 
 function verifieSiEmprunte($id)
 {
-    $sql = "SELECT date_retour FROM emprunt_v_emprunt_objet WHERE id_objet = '%s'";
-    $sql = sprintf($sql, $id);
+    $date = date('Y-m-d');
+    $sql = "SELECT date_retour FROM emprunt_v_emprunt_objet WHERE id_objet = '%s' AND date_retour > '%s'";
+    $sql = sprintf($sql, $id, $date);
     $request = mysqli_query(dbconnect(), $sql);
     if(mysqli_num_rows($request) > 0)
     {
@@ -188,4 +189,17 @@ function uploadImg($id_mbr,$file, $name, $idCategorie)
     } else {
         echo "Aucun fichier reçu.";
     }
+}
+
+function addEmprunt($objet, $membre, $nbrFin)
+{
+    $dateDebut = date('Y-m-d');
+    $dateFin = "SELECT DATE_ADD('$dateDebut', INTERVAL $nbrFin DAY) as daty";
+    $request1 = mysqli_query(dbconnect(), $dateFin);
+    $dateFin = mysqli_fetch_assoc($request1);
+    $sql = "INSERT emprunt_emprunt(id_objet, id_membre, date_emprunt, date_retour) VALUES
+    ('%s', '%s', '%s', '%s')
+    ";
+    $sql = sprintf($sql, $objet, $membre, $dateDebut, $dateFin['daty']);
+    $request2 = mysqli_query(dbconnect(), $sql);
 }

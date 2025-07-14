@@ -67,7 +67,11 @@ $objets = getListObject();
                                     </td>
                                     <?php $emprunt = verifieSiEmprunte($o['id_objet']); ?>
                                     <td>
-                                        <?= $emprunt !== false ? "<span class='badge bg-success'>$emprunt</span>" : "<span class='text-muted fst-italic'>Non emprunté</span>" ?>
+                                        <?php if($emprunt != false) {?>
+                                            <span class="badge bg-success">Disponible le <?= $emprunt; ?></span>
+                                        <?php }else{?>
+                                            <a href="emprunt.php?idObjet=<?= $o['id_objet']; ?>&idMembre=<?= $_SESSION['user_id']; ?>"><span class='text-muted fst-italic'><button>Emprunte</button></span></a>
+                                        <?php }?>    
                                     </td>
                                 </tr>
                             <?php } ?>
