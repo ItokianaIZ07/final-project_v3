@@ -1,0 +1,29 @@
+body {
+    background-color: #1e1e1e; 
+  }
+  .form-container {
+    background-color: #ffffff;
+    color: #111111;
+  }
+  .btn-black {
+    background-color: #000000;
+    border-color: #000000;
+    color: white;
+  }
+  .btn-black:hover {
+    background-color: #333333;
+    border-color: #333333;
+    color: white;
+  }
+  .text-black {
+    color: #000000;
+  }
+  hr {
+    border-top: 1px solid #aaa;
+  }
+  a {
+    color: #000000;
+  }
+  a:hover {
+    color: #333333;
+  }
