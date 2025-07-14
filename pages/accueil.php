@@ -2,7 +2,7 @@
 ini_set("display_errors", "1");
 require('../inc/function.php');
 session_start();
-$parameters = ["Nom", "Date de retour"];
+$parameters = ["Nom", "Date de retour", "Changer"];
 $objets = getListObject();
 ?>
 <!DOCTYPE html>
@@ -33,6 +33,68 @@ $objets = getListObject();
     </header>
 
     <main>
+        <div class="container mt-4">
+            <?php if(!empty($objets)) {?>
+                <h1 class="text-center mb-4">Liste des objets empruntes</h1>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped border rounded overflow-hidden shadow-sm bg-white">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <?php foreach ($parameters as $param) { ?>
+                                    
+                                    <th><?= $param; ?></th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center align-middle">
+                            <?php foreach ($objets as $o) { ?>
+                                <tr>
+                                    <?php $emprunt = verifieSiEmprunte($o['id_objet']); ?>
+                                    <?php if($emprunt != false) {?>
+                                    <td class="fw-semibold">
+                                        <div class="row">
+                                            
+                                            <div class="col">
+                                                
+                                                <a href="affichage.php?id=<?= $o['id_objet']; ?>&name=<?= $o['nom_objet']; ?>&categorie=<?= $o['id_categorie']; ?>">
+                                                    <?= $o['nom_objet']; ?>
+                                                </a>
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="fw-semibold">
+                                        <div class="row">
+                                            
+                                            <div class="col">
+                                                
+                                            <span class="badge bg-success">Disponible le <?= $emprunt; ?></span>
+                                               
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button>Retour</button>
+                                    </td>
+                                    <?php }?>
+                                    
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <?php }?>
+        </div>
+
+
+
+
+
+
         <div class="container mt-4">
             <?php if (!empty($objets)) { ?>
                 <h1 class="text-center mb-4">Listes des objets</h1>

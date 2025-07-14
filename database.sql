@@ -18,7 +18,8 @@ create table emprunt_objet(
     id_objet INT AUTO_INCREMENT PRIMARY KEY,
     nom_objet VARCHAR(150),
     id_categorie INT,
-    id_membre INT
+    id_membre INT,
+    etat VARCHAR(50)
 );
 
 create table emprunt_images_objet(
@@ -89,4 +90,7 @@ create or replace view emprunt_v_categorie_objet as
     SELECT o.id_objet, o.nom_objet, o.id_categorie, c.nom_categorie FROM emprunt_objet as o JOIN emprunt_categorie_objet as c ON c.id_categorie = o.id_categorie;
 
 create or replace view emprunt_v_images_objet as 
-    SELECT o.id_objet, o.nom_objet, o.id_categorie, i.nom_image, i.id_image FROM emprunt_objet as o JOIN emprunt_images_objet as i ON o.id_objet = i.id_objet;    
+    SELECT o.id_objet, o.nom_objet, o.id_categorie, i.nom_image, i.id_image FROM emprunt_objet as o JOIN emprunt_images_objet as i ON o.id_objet = i.id_objet;
+
+create or replace view emprunt_v_etat_emprunt_objet as 
+    SELECT o.id_objet, o.nom_objet, o.id_categorie, o.id_membre,o.etat,e.date_emprunt, e.date_retour FROM emprunt_emprunt as e JOIN emprunt_objet as o ON e.id_objet = o.id_objet;
