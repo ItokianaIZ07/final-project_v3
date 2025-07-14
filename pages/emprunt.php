@@ -42,6 +42,11 @@ $idMembre = $_GET['idMembre'];
                 <input type="submit" value="valider">
             </form>
         </div>
+        <?php if(isset($_GET['error'])){ ?>
+            <div class="error">
+                <p class="h3 alert">Veuillez entrer un nombre positif</p>
+            </div>
+        <?php }?>
     </main>
 </body>
 
