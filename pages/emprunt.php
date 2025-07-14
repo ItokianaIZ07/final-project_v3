@@ -34,12 +34,12 @@ $idMembre = $_GET['idMembre'];
     <main>
         <div class="container">
             <form action="traitement-emprunt.php" method="post">
-                <label for="nbr">Rendre apres : </label>
+                <label for="nbr" class="form-label">Rendre apres : </label>
                 <input type="number" id="nbr" name="nbr" required>
                 <span>jour</span>
                 <input type="hidden" name="membre" value="<?= $idMembre; ?>">
                 <input type="hidden" name="objet" value="<?= $idObject; ?>">
-                <input type="submit" value="valider">
+                <input type="submit" value="valider" class="btn btn-light">
             </form>
         </div>
         <?php if(isset($_GET['error'])){ ?>
